@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+    <link rel="stylesheet" href = "http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <style>
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+        display: none !important;
+}
+    </style>
+</head>
+
+<body ng-app="taskApp">
+<div class="container" ng-controller="taskController">
+    <h1 align="center">Task Manager</h1>
+    <br><br>
+    <div style = "text-align: center">
+    <p> Enter a task: <input type="text" ng-model = "taskName"> </input>
+        <button class="btn btn-success" ng-click = "addTask()">Add</button>
+
+    <input type = "hidden" ng-model = "taskStatus"></p>
+
+    <p> Search a task: <input type="text" ng-model="search">
+        <span class="glyphicon glyphicon-search"></span>
+        </input>
+    </p></div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Task Name</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="task in taskList | filter:search">
+
+            <td ng-cloak>{{ task.id }}</td>
+            <td ng-cloak>{{ task.name }}</td>
+            <td ng-click = "changeStatus($index)" ng-cloak>{{ task.status }}</td>
+           <td>
+                <button class="btn" ng-click="deleteTask($index)">
+                    <span class="glyphicon glyphicon-remove"></span> Delete
+                </button>
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+<p ng-cloak>Number of tasks: {{taskList.length}} </p>
+
+    
+    <script src= "taskManager.js"></script>
+</div> <!-- Container div ends-->
+</body>
+</html>
